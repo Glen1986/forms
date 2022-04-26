@@ -1,20 +1,28 @@
-//parapoder interceptar los envios de un formulario, debemos ocupar la opcionde submit
-function App() {
-    const submit = (e) => {
-        e.preventDefault()
-        const data = Array.from(new FormData(e.target))
-        console.log(Object.fromEntries(data))
+import { useRef } from 'react'
+const App = () => {
+    const input = useRef()
+    const file = useRef()
+    const submit = () => {
+        console.log(input.current.value)
+        //accedemos a los archivos contenidos en el input de referencia
+        console.log(file.current.files[0])
+        //creamos un formularion a partir de formData
+        const form = new FormData()
+        //de manera individual se agregan los campos al formulario
+        form.append('archivo', file.current.files[0])
+        form.append('campo', input.current.value)
+        //ejemplo de como se podria mandar la inf del formulario por fetch
+        fetch('/lala', { method: 'POST', body: form })
     }
     return (
-        <form onSubmit={submit}>
+        <div>
             <div>
-                <span>cerdo</span>
-                <input name="campo" />
+                <span>lala</span>
+                <input ref={input} type="text" name="campo" />
+                <input type="file" name="archivo" ref={file} />
             </div>
-            <input name="campo-2" />
-            <input type="submit" value="enviar" />
-        </form>
+            <input onClick={submit} type="submit" valor="enviar" />
+        </div>
     )
 }
-
 export default App
