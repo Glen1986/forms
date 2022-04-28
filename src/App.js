@@ -6,11 +6,14 @@ const App = () => {
         normal: '',
         texto: '',
         select: '',
+        check: false,
     })
-    const handleChange = (e) => {
+    const handleChange = ({ target }) => {
         setValue((state) => ({
             ...state,
-            [e.target.name]: e.target.value,
+            [target.name]:
+                //verificamos si tenemos un 'checkbox', y asignamos el valor de target.checked
+                target.type === 'checkbox' ? target.checked : target.value,
         }))
         // setValue({
         // ...value,
@@ -41,6 +44,12 @@ const App = () => {
                 <option value="cafe">café</option>
                 <option value="weed">weed</option>
             </select>
+            <input
+                type="checkbox"
+                name="check"
+                onChange={handleChange}
+                checked={value.check}
+            />
         </div>
     )
 }
