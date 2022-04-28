@@ -7,6 +7,7 @@ const App = () => {
         texto: '',
         select: '',
         check: false,
+        estado: '',
     })
     const handleChange = ({ target }) => {
         setValue((state) => ({
@@ -50,6 +51,45 @@ const App = () => {
                 onChange={handleChange}
                 checked={value.check}
             />
+            {/***
+            <div onChange={handleChange}>
+                <label>chancho</label>
+                <input type="radio" name="estado" value="volado" />
+                volado
+                <input type="radio" name="estado" value="caf√©" />
+                caf√©
+                <input type="radio" name="estado" value="weed" />
+                weed
+            </div>
+
+                **/}
+            <div>
+                <label>chancho</label>
+                <input
+                    onChange={handleChange}
+                    type="radio"
+                    name="estado"
+                    value="volado"
+                    checked={value.estado === 'volado'}
+                />
+                volado
+                <input
+                    onChange={handleChange}
+                    type="radio"
+                    name="estado"
+                    value="cafe"
+                    checked={value.estado === 'cafe'}
+                />
+                café
+                <input
+                    onChange={handleChange}
+                    type="radio"
+                    name="estado"
+                    value="weed"
+                    checked={value.estado === 'weed'}
+                />
+                weed
+            </div>
         </div>
     )
 }
