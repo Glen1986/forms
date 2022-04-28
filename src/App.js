@@ -2,7 +2,11 @@ import { useState } from 'react'
 const App = () => {
     //los datos del campo input estan sincronizadon con la UI
     //y se encuentran guardados en el state "value"
-    const [value, setValue] = useState({ normal: '', texto: '' })
+    const [value, setValue] = useState({
+        normal: '',
+        texto: '',
+        select: '',
+    })
     const handleChange = (e) => {
         setValue((state) => ({
             ...state,
@@ -31,6 +35,12 @@ const App = () => {
                 value={value.texto}
                 onChange={handleChange}
             />
+            <select value={value.select} name="select" onChange={handleChange}>
+                <option value="">select</option>
+                <option value="volado">volado</option>
+                <option value="cafe">café</option>
+                <option value="weed">weed</option>
+            </select>
         </div>
     )
 }
