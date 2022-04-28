@@ -2,9 +2,16 @@ import { useState } from 'react'
 const App = () => {
     //los datos del campo input estan sincronizadon con la UI
     //y se encuentran guardados en el state "value"
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState({ normal: '', texto: '' })
     const handleChange = (e) => {
-        setValue(e.target.value)
+        setValue((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }))
+        // setValue({
+        // ...value,
+        // [e.target.name]: e.target.value,
+        // })
     }
     console.log(value)
     return (
@@ -14,7 +21,14 @@ const App = () => {
             <input
                 type="text"
                 name="normal"
-                value={value}
+                value={value.normal}
+                onChange={handleChange}
+            />
+            <textarea
+                name="texto"
+                cols="30"
+                rows="2"
+                value={value.texto}
                 onChange={handleChange}
             />
         </div>
