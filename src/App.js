@@ -1,27 +1,22 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 const App = () => {
-    const input = useRef()
-    const file = useRef()
-    const submit = () => {
-        console.log(input.current.value)
-        //accedemos a los archivos contenidos en el input de referencia
-        console.log(file.current.files[0])
-        //creamos un formularion a partir de formData
-        const form = new FormData()
-        //de manera individual se agregan los campos al formulario
-        form.append('archivo', file.current.files[0])
-        form.append('campo', input.current.value)
-        //ejemplo de como se podria mandar la inf del formulario por fetch
-        fetch('/lala', { method: 'POST', body: form })
+    //los datos del campo input estan sincronizadon con la UI
+    //y se encuentran guardados en el state "value"
+    const [value, setValue] = useState('')
+    const handleChange = (e) => {
+        setValue(e.target.value)
     }
+    console.log(value)
     return (
         <div>
-            <div>
-                <span>lala</span>
-                <input ref={input} type="text" name="campo" />
-                <input type="file" name="archivo" ref={file} />
-            </div>
-            <input onClick={submit} type="submit" valor="enviar" />
+            {value.length < 5 ? <span>valeor menor a 5</span> : null}
+
+            <input
+                type="text"
+                name="normal"
+                value={value}
+                onChange={handleChange}
+            />
         </div>
     )
 }
